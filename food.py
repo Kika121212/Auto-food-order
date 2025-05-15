@@ -13,7 +13,7 @@ if st.button("Place Order"):
         "item": item,
         "upi_id": upi_id
     }
-    response = requests.post("http://localhost:5678/webhook-test/order", json=payload)
+    response = requests.post("http://n8n.localhost:5678/webhook/place-order", json=payload)
 
     if response.status_code == 200:
         st.success("Order Placed Successfully!")
