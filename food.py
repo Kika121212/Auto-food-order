@@ -15,5 +15,5 @@ if st.button("Place Order"):
         "location": location,
         "upi_id": upi_id
     }
-    response = requests.post("http://localhost:5678/webhook-test/order", json=data)
-    st.success("Order initiated! Wait for UPI request.")
+    response = requests.post("http://localhost:5678/webhook-test/order", json=payload)
+    st.success("Order initiated! Wait for UPI request.")
