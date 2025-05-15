@@ -1,19 +1,21 @@
 import streamlit as st
 import requests
 
-st.title("Auto Food Ordering App")
+st.title("Auto Order Food App")
 
 platform = st.selectbox("Choose Platform", ["Swiggy", "Zomato"])
-cuisine = st.selectbox("Select Cuisine", ["North Indian", "South Indian", "Chinese", "Pizza"])
-location = st.text_input("Your Location")
-upi_id = st.text_input("Your UPI ID (e.g. yourname@upi)")
+item = st.text_input("Enter Food Item")
+upi_id = st.text_input("Enter Your UPI ID")
 
 if st.button("Place Order"):
     payload = {
-        "platform": platform,
-        "cuisine": cuisine,
-        "location": location,
+        "platform": platform.lower(),
+        "item": item,
         "upi_id": upi_id
     }
     response = requests.post("http://localhost:5678/webhook-test/order", json=payload)
-    st.success("Order initiated! Wait for UPI request.")
+
+    if response.status_code == 200:
+        st.success("Order Placed Successfully!")
+    else:
+        st.error("Failed to place order.")
